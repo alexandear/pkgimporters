@@ -261,8 +261,8 @@ func fetchImporterCount(ctx context.Context, client *http.Client, pkgPath string
 	}
 	defer resp.Body.Close()
 
-	// Only read first 100KB since "Known importers" appears early in HTML
-	limitedReader := io.LimitReader(resp.Body, 100*1024)
+	// Only read first 40KB since "Known importers" appears early in HTML
+	limitedReader := io.LimitReader(resp.Body, 40*1024)
 	body, err := io.ReadAll(limitedReader)
 	if err != nil {
 		return 0, fmt.Errorf("read body: %w", err)
