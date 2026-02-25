@@ -65,29 +65,29 @@ func run() error {
 	pkgsList := flag.String("pkgs", "", "comma-separated list of packages to fetch or 'std' for all standard library packages")
 	progName := filepath.Base(os.Args[0])
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "NAME\n")
-		fmt.Fprintf(os.Stderr, "    %s - fetch known importers for Go packages from pkg.go.dev\n\n", progName)
-		fmt.Fprintf(os.Stderr, "SYNOPSIS\n")
-		fmt.Fprintf(os.Stderr, "    %s [-pkgs pkg1,pkg2,...|std] [-workers N] [-sort name|count] [package ...]\n\n", progName)
-		fmt.Fprintf(os.Stderr, "DESCRIPTION\n")
-		fmt.Fprintf(os.Stderr, "    pkgimporters fetches the number of known importers for Go packages\n")
-		fmt.Fprintf(os.Stderr, "    from pkg.go.dev. Packages can be specified via positional arguments,\n")
-		fmt.Fprintf(os.Stderr, "    comma-separated list with -pkgs, or all stdlib with -pkgs std.\n\n")
-		fmt.Fprintf(os.Stderr, "OPTIONS\n")
+		fmt.Fprintf(os.Stderr, "NAME\n"+
+			"    %[1]s - fetch known importers for Go packages from pkg.go.dev\n\n"+
+			"SYNOPSIS\n"+
+			"    %[1]s [-pkgs pkg1,pkg2,...|std] [-workers N] [-sort name|count] [package ...]\n\n"+
+			"DESCRIPTION\n"+
+			"    %[1]s fetches the number of known importers for Go packages from https://pkg.go.dev.\n"+
+			"Packages can be specified via positional arguments,\n"+
+			"    comma-separated list with -pkgs, or all stdlib with -pkgs std.\n\n"+
+			"OPTIONS\n", progName)
 		flag.PrintDefaults()
-		fmt.Fprintf(os.Stderr, "\nEXAMPLES\n")
-		fmt.Fprintf(os.Stderr, "    %s fmt\n", progName)
-		fmt.Fprintf(os.Stderr, "        Fetch importers for the fmt package\n\n")
-		fmt.Fprintf(os.Stderr, "    %s fmt bufio net/http golang.org/x/tools/go/analysis\n", progName)
-		fmt.Fprintf(os.Stderr, "        Fetch importers for multiple packages\n\n")
-		fmt.Fprintf(os.Stderr, "    %s -pkgs fmt,bufio,net/http\n", progName)
-		fmt.Fprintf(os.Stderr, "        Fetch importers using comma-separated packages\n\n")
-		fmt.Fprintf(os.Stderr, "    %s -pkgs std\n", progName)
-		fmt.Fprintf(os.Stderr, "        Fetch importers for all standard library packages\n\n")
-		fmt.Fprintf(os.Stderr, "    %s -workers 20 -pkgs std\n", progName)
-		fmt.Fprintf(os.Stderr, "        Use 20 concurrent requests when fetching all stdlib packages\n\n")
-		fmt.Fprintf(os.Stderr, "    %s -pkgs std -sort count\n", progName)
-		fmt.Fprintf(os.Stderr, "        Fetch all stdlib packages and sort by importer count descending\n")
+		fmt.Fprintf(os.Stderr, "\nEXAMPLES\n"+
+			"    %[1]s fmt\n"+
+			"        Fetch importers for the fmt package\n\n"+
+			"    %[1]s fmt bufio net/http golang.org/x/tools/go/analysis\n"+
+			"        Fetch importers for multiple packages\n\n"+
+			"    %[1]s -pkgs fmt,bufio,net/http\n"+
+			"        Fetch importers using comma-separated packages\n\n"+
+			"    %[1]s -pkgs std\n"+
+			"        Fetch importers for all standard library packages\n\n"+
+			"    %[1]s -workers 20 -pkgs std\n"+
+			"        Use 20 concurrent requests when fetching all stdlib packages\n\n"+
+			"    %[1]s -pkgs std -sort count\n"+
+			"        Fetch all stdlib packages and sort by importer count descending\n", progName)
 	}
 	flag.Parse()
 
